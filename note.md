@@ -32,4 +32,8 @@
 - use flag package
 - declare a command line args by `addr:=flag.String("addr", ":4000", "HTTP network address")`
 - then parse in the main function by `flag.Parse()`
-
+8. golang logger
+- you can use by `logger = slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{AddSource=true}))`
+9. dependencies injection: allow all functions access to the same object
+- all in one package: create a struct `application` in `main.go`, Add it as method receiver to existing functions
+- in different package: create a package exporting struct `application`, enclose the exisitng function into a closure with parameter `application` (i.e. function that returns a function) 
