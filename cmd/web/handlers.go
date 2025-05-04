@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -10,15 +9,13 @@ import (
 // Define a home handler function which writes a byte slice containing "Hello from Snippetbox" as the response body
 func home(w http.ResponseWriter, r *http.Request) {
 	// Set the content type to text/plain
-	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Add("Server", "Go")
 	// Write the response body
 	w.Write([]byte("Hello from Snippetbox"))
 }
 
 // Define a snippetView handler that display a specific snippet
 func snippetView(w http.ResponseWriter, r *http.Request) {
-	// Set the content type to text/plain
-	w.Header().Set("Content-Type", "text/plain")
 	// Write the response body
 	id, err := strconv.Atoi(r.PathValue("id"))
 	if err != nil || id < 1 {
@@ -46,28 +43,9 @@ func snippetCreateTest(w http.ResponseWriter, r *http.Request) {
 
 // Define a snippetCreatePost handler that save a new snippet
 func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
-	// Set the content type to text/plain
 	w.Header().Add("Server", "Go")
 	w.Header().Add("Author", "dan")
 	w.WriteHeader(http.StatusCreated)
 	// Write the response body
 	w.Write([]byte("Save a new snippet..."))
-}
-
-func main() {
-	// Create a new ServeMux
-	mux := http.NewServeMux()
-	// Register the home handler function for the root URL path
-	mux.HandleFunc("GET /{$}", home)
-	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
-	mux.HandleFunc("GET /snippet/create", snippetCreate)
-	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
-	mux.HandleFunc("GET /snippet/foo/{path}", snippetCreateTest)
-
-	// Start the HTTP server on port 4000 and use the mux as the handler
-	log.Println("Starting server on :4000")
-	err := http.ListenAndServe(":4000", mux)
-	if err != nil {
-		log.Fatal(err)
-	}
 }

@@ -7,4 +7,17 @@
 - wildcard route patterns: `/products/{category}/item/{itemID}`, you could fetch the value in string by `r.PathValue("category")`, wildcard segment `{path}` must not contain /, otherwise use `{path...}`
 3. Go interface
 - use duck typing (implicit implementation): e.g. `http.ResponseWriter` is an interface which contains a function `Write`. `io.Write` is an interface which only has a function `Write`. In this case, `http.ResponseWriter` is of type `io.Write`. So for any function that has `io.Write` parameter, you could pass in `http.ResponseWriter` value. For function `io.WriteString`, it will finally call `w.Write`, so we could replace `w.Write([]byte("Hello world"))` with `io.WriteString(w, "Hello World")`
-
+4. project structure
+```
+.
+├── cmd
+│   └── web % application-specific code
+│       ├── handlers.go
+│       └── main.go
+├── go.mod
+├── internal % normal code shared by all applications under the parent directory of internal
+├── note.md
+└── ui
+    ├── html
+    └── static
+```
