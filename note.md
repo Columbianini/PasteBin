@@ -25,3 +25,6 @@
 - use `{{define "{TemplateName}"}}...{some html contents or string}...{{end}}` to set a named template value
 - use `{{template {TemplateName} .}}` or `{{block {TemplateName} .}}...{{end}}`(can provide default value inside if not then not render if fail) to declare a template, base template does not need to declare but need to mention in `(t *template.Template) ExecuteTemplate(wr io.Writer, name string, data any) error`
 - in the code, you should first parse all related templates by `func template.ParseFiles(filenames ...string) (*template.Template, error)`
+6. golang fileserver
+- initialize with `http.FileServer(http.Dir(path relative to project directory))`
+- start with `mux.Handle(http.StripPrefix)`
