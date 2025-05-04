@@ -45,14 +45,23 @@ func snippetCreateTest(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(msg))
 }
 
+// Define a snippetCreatePost handler that save a new snippet
+func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	// Set the content type to text/plain
+	w.Header().Set("Content-Type", "text/plain")
+	// Write the response body
+	w.Write([]byte("Save a new snippet..."))
+}
+
 func main() {
 	// Create a new ServeMux
 	mux := http.NewServeMux()
 	// Register the home handler function for the root URL path
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/snippet/view/{id}", snippetView)
-	mux.HandleFunc("/snippet/create", snippetCreate)
-	mux.HandleFunc("/snippet/foo/{path}", snippetCreateTest)
+	mux.HandleFunc("GET /{$}", home)
+	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
+	mux.HandleFunc("GET /snippet/create", snippetCreate)
+	mux.HandleFunc("POST /snippet/create", snippetCreatePost)
+	mux.HandleFunc("GET /snippet/foo/{path}", snippetCreateTest)
 
 	// Start the HTTP server on port 4000 and use the mux as the handler
 	log.Println("Starting server on :4000")
