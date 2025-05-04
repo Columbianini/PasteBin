@@ -28,3 +28,8 @@
 6. golang fileserver
 - initialize with `http.FileServer(http.Dir(path relative to project directory))`
 - start with `mux.Handle(http.StripPrefix)`
+7. golang command line variables
+- use flag package
+- declare a command line args by `addr:=flag.String("addr", ":4000", "HTTP network address")`
+- then parse in the main function by `flag.Parse()`
+
