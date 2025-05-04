@@ -37,3 +37,5 @@
 9. dependencies injection: allow all functions access to the same object
 - all in one package: create a struct `application` in `main.go`, Add it as method receiver to existing functions
 - in different package: create a package exporting struct `application`, enclose the exisitng function into a closure with parameter `application` (i.e. function that returns a function) 
+10. centralized error handling
+- use package `runtime/debug` to write debug trace into log
