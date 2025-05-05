@@ -45,3 +45,5 @@
 - install db server (mssql, mysql, etc)
 - change db server config to allow listening to all IPs, `sudo systemctl start mysql` to update it
 - create new user and grant privileges by `CREATE USER 'username'@['host'|'%']; ALTER USER 'usename'@['host'|'%'] IDENTIFIED BY 'pass'; GRANT [SELECT,INSERT,UPDATE,DELETE|ALL PRIVILEGES] ON ['database'|*].['table'|*] TO 'username'@'%';`
+13. golang to display a struct
+- `fmt.FPrintf(w, "%+v", snippet)`
