@@ -39,3 +39,9 @@
 - in different package: create a package exporting struct `application`, enclose the exisitng function into a closure with parameter `application` (i.e. function that returns a function) 
 10. centralized error handling
 - use package `runtime/debug` to write debug trace into log
+11. `defer` keyword
+- In Go, defer schedules a function call to run ​​just before the surrounding function returns​​, regardless of how it returns (normally, via return, or due to a panic). Much like finally in python. However, `defer` won't run if application is terminated by a signal interrupt (i.e. Ctrl+C or by os.Exit(1))
+12. DBA: set up a database
+- install db server (mssql, mysql, etc)
+- change db server config to allow listening to all IPs, `sudo systemctl start mysql` to update it
+- create new user and grant privileges by `CREATE USER 'username'@['host'|'%']; ALTER USER 'usename'@['host'|'%'] IDENTIFIED BY 'pass'; GRANT [SELECT,INSERT,UPDATE,DELETE|ALL PRIVILEGES] ON ['database'|*].['table'|*] TO 'username'@'%';`
