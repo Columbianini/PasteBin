@@ -47,3 +47,7 @@
 - create new user and grant privileges by `CREATE USER 'username'@['host'|'%']; ALTER USER 'usename'@['host'|'%'] IDENTIFIED BY 'pass'; GRANT [SELECT,INSERT,UPDATE,DELETE|ALL PRIVILEGES] ON ['database'|*].['table'|*] TO 'username'@'%';`
 13. golang to display a struct
 - `fmt.FPrintf(w, "%+v", snippet)`
+14. go template method
+- `{{if .Snippet}} C1 {{else}} C2 {{end}}`: render C1 if we have non-empty Snippet field in data else render C2
+- `{{with .Snippet}} C1 {{else}} C2 {{end}}`: same as above, but we will set dot = .Snippet in the with block to save some typings
+- `{{range .Snippets}} C1 {{else}} C2 {{end}}`: for each Snippet in Snippets, render C1. If Snippets is empty, then render C2
