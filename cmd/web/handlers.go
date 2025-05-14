@@ -51,6 +51,8 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
 	// Set the content type to text/plain
 	// Write the response body
+	data := app.newTemplateData(r)
+	app.render(w, r, http.StatusOK, "create.tmpl", data)
 	w.Write([]byte("Create a form for creting a new snippet..."))
 }
 
