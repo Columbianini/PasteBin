@@ -1,9 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"runtime/debug"
 )
+
+func (app *application) render(w http.ResponseWriter, status int, page string, data *templateData) {
+	ts, ok := app.templateCache[page]
+	if !ok {
+		app.serverError(w, nil, fmt.Errorf("the template %s does not exist", page))
+		return
+	}
+	w.WriteHeader(status)
+	err := ts.ExecuteTemplate(w, "base", data)
+	if err != nil {
+		app.serverError(w, nil, err)
+	}
+}
 
 func (app *application) serverError(w http.ResponseWriter, r *http.Request, err error) {
 	var (
