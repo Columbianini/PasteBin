@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func (app *application) routes() *http.ServeMux {
+func (app *application) routes() http.Handler {
 	// Create a new ServeMux
 	mux := http.NewServeMux()
 
@@ -18,5 +18,5 @@ func (app *application) routes() *http.ServeMux {
 	mux.HandleFunc("POST /snippet/create", app.snippetCreatePost)
 	mux.HandleFunc("GET /snippet/foo/{path}", app.snippetCreateTest)
 
-	return mux
+	return app.logRequest(commonHeaders(mux))
 }

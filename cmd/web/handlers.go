@@ -12,7 +12,6 @@ import (
 // Define a home handler function which writes a byte slice containing "Hello from Snippetbox" as the response body
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	// Set the content type to text/plain
-	w.Header().Add("Server", "Go")
 	snippets, err := app.snippets.Latest()
 	if err != nil {
 		app.serverError(w, r, err)
@@ -51,14 +50,12 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 // Define a snippetCreate handler that creates a new snippet
 func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
 	// Set the content type to text/plain
-	w.Header().Set("Content-Type", "text/plain")
 	// Write the response body
 	w.Write([]byte("Create a form for creting a new snippet..."))
 }
 
 func (app *application) snippetCreateTest(w http.ResponseWriter, r *http.Request) {
 	// Set the content type to text/plain
-	w.Header().Set("Content-Type", "text/plain")
 	// Write the response body
 	msg := fmt.Sprintf("Path: %s\n", r.PathValue("path"))
 	w.Write([]byte(msg))
@@ -66,8 +63,6 @@ func (app *application) snippetCreateTest(w http.ResponseWriter, r *http.Request
 
 // Define a snippetCreatePost handler that save a new snippet
 func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Server", "Go")
-	w.Header().Add("Author", "dan")
 	// Write the response body
 
 	title := "0 snail"
