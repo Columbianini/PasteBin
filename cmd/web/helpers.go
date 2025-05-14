@@ -1,22 +1,29 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"net/http"
 	"runtime/debug"
 )
 
-func (app *application) render(w http.ResponseWriter, status int, page string, data *templateData) {
+func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data *templateData) {
 	ts, ok := app.templateCache[page]
 	if !ok {
 		app.serverError(w, nil, fmt.Errorf("the template %s does not exist", page))
 		return
 	}
-	w.WriteHeader(status)
-	err := ts.ExecuteTemplate(w, "base", data)
+
+	buf := new(bytes.Buffer)
+	err := ts.ExecuteTemplate(buf, "base", data)
 	if err != nil {
-		app.serverError(w, nil, err)
+		app.serverError(w, r, err)
+		return
 	}
+
+	w.WriteHeader(status)
+	buf.WriteTo(w)
+
 }
 
 func (app *application) serverError(w http.ResponseWriter, r *http.Request, err error) {

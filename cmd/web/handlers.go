@@ -18,7 +18,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, r, err)
 		return
 	}
-	app.render(w, http.StatusOK, "home.tmpl", &templateData{Snippets: snippets})
+	app.render(w, r, http.StatusOK, "home.tmpl", &templateData{Snippets: snippets})
 }
 
 // Define a snippetView handler that display a specific snippet
@@ -40,7 +40,7 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.render(w, http.StatusOK, "view.tmpl", &templateData{Snippet: &snippet})
+	app.render(w, r, http.StatusOK, "view.tmpl", &templateData{Snippet: &snippet})
 }
 
 // Define a snippetCreate handler that creates a new snippet
