@@ -11,10 +11,10 @@ import (
 )
 
 type snippetCreateForm struct {
-	Title   string
-	Content string
-	Expires int
-	validator.Validator
+	Title               string `form:"title"`
+	Content             string `form:"content"`
+	Expires             int    `form:"expires"`
+	validator.Validator `form:"-"`
 }
 
 // Define a home handler function which writes a byte slice containing "Hello from Snippetbox" as the response body
@@ -76,22 +76,12 @@ func (app *application) snippetCreateTest(w http.ResponseWriter, r *http.Request
 
 // Define a snippetCreatePost handler that save a new snippet
 func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
-	// Write the response body
-	err := r.ParseForm()
-	if err != nil {
-		app.clientError(w, http.StatusBadRequest)
-		return
-	}
+	var form snippetCreateForm
 
-	expires, err := strconv.Atoi(r.PostForm.Get("expires"))
+	err := app.decodePostForm(r, &form)
 	if err != nil {
 		app.clientError(w, http.StatusBadRequest)
 		return
-	}
-	form := snippetCreateForm{
-		Title:   r.PostForm.Get("title"),
-		Content: r.PostForm.Get("content"),
-		Expires: expires,
 	}
 
 	form.CheckField(validator.NotBlank(form.Title), "title", "This field cannot be blank")
@@ -106,7 +96,7 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	id, err := app.snippets.Insert(form.Title, form.Content, expires)
+	id, err := app.snippets.Insert(form.Title, form.Content, form.Expires)
 	if err != nil {
 		app.serverError(w, r, err)
 		return
