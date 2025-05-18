@@ -51,3 +51,5 @@
 - `{{if .Snippet}} C1 {{else}} C2 {{end}}`: render C1 if we have non-empty Snippet field in data else render C2
 - `{{with .Snippet}} C1 {{else}} C2 {{end}}`: same as above, but we will set dot = .Snippet in the with block to save some typings
 - `{{range .Snippets}} C1 {{else}} C2 {{end}}`: for each Snippet in Snippets, render C1. If Snippets is empty, then render C2
+15. [Embed struct in struct](https://eli.thegreenplace.net/2020/embedding-in-go-part-1-structs-in-structs/)
+- Embeding struct will auto inherit the property and method of the embedded struct
