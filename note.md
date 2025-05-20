@@ -53,3 +53,8 @@
 - `{{range .Snippets}} C1 {{else}} C2 {{end}}`: for each Snippet in Snippets, render C1. If Snippets is empty, then render C2
 15. [Embed struct in struct](https://eli.thegreenplace.net/2020/embedding-in-go-part-1-structs-in-structs/)
 - Embeding struct will auto inherit the property and method of the embedded struct
+16. Check and Grant permissions in mysql
+```sql
+SHOW GRANTS FOR 'web'@'192.168.10.1';
+GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1' 
+```
