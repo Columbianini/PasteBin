@@ -64,10 +64,16 @@ func main() {
 		SessionManager: sessionManager,
 	}
 
+	srv := &http.Server{
+		Addr:     *addr,
+		Handler:  app.routes(),
+		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+	}
+
 	// Start the HTTP server on port 4000 and use the mux as the handler
 	logger.Info("Starting server", "addr", *addr)
 
-	err = http.ListenAndServe(*addr, app.routes())
+	err = srv.ListenAndServe()
 	logger.Error(err.Error())
 	os.Exit(1)
 }
