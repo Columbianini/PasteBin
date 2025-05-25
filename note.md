@@ -84,4 +84,19 @@ GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1'
 - use `go test ./cmd/web` command to run all the tests in our `cmd/web` package like
 - Table-driven tests: a way to run multiple test cases. You can define your test cases in a slice of anonymous structs
 - To unit test your HTTP handlers and middleware is to simply call them using the httptest.ResponseRecorder type. You can then examine the status code, headers and response body of the recorded response to make sure that they are working as expected.
+- some commands
+```bash
+go test ./cmd/web # test package
+go test ./... # test all tests
+go test -v -run="^TestPing$" ./cmd/web/  # test specific tests
+go test -v -run="^TestHumanDate$/^UTC$" ./cmd/web # test specific case
+go test -v -skip="^TestHumanDate$" ./cmd/web/ # skip tests 
+go test -count=1 ./cmd/web # force to run tests without caching 
+go clean -testcache # remove all tests cache
+go test -failfast ./cmd/web # stop package tests when test failed
+go test -race ./cmd/web/
+go test -parallel=4 ./...
+```
+- You can add `t.Parallel()` just like `t.Helper()` in the test function if you want it to be running in parallel
+
 
