@@ -82,4 +82,4 @@ GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1'
 - To be a valid unit test, the name of the function must begin with the word `Test`.
 - You can use the `t.Errorf()` function to make a test as failed and log a descriptive message about the failure. It's important to note that calling `t.Errorf()` doesn't stop execution of your tests
 - use `go test ./cmd/web` command to run all the tests in our `cmd/web` package like
-- Table-driven tests: a way to run multiple test cases
+- Table-driven tests: a way to run multiple test cases. You can define your test cases in a slice of anonymous structs
