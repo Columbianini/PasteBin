@@ -58,3 +58,6 @@
 SHOW GRANTS FOR 'web'@'192.168.10.1';
 GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1' 
 ```
+17. Generate TLS certificate for HTTPS server
+- create a tls folder under workspace
+- `go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2049 --host=localhost`
