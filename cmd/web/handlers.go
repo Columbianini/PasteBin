@@ -209,6 +209,7 @@ func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/snippet/create", http.StatusSeeOther)
 }
+
 func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
 	err := app.SessionManager.RenewToken(r.Context())
 	if err != nil {
@@ -218,4 +219,9 @@ func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
 	app.SessionManager.Remove(r.Context(), "authenticatedUserID")
 	app.SessionManager.Put(r.Context(), "flash", "You have been logged out successfully!")
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func ping(w http.ResponseWriter, r *http.Request) {
+	// Write the response body
+	w.Write([]byte("OK"))
 }
