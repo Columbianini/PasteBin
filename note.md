@@ -83,3 +83,5 @@ GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1'
 - You can use the `t.Errorf()` function to make a test as failed and log a descriptive message about the failure. It's important to note that calling `t.Errorf()` doesn't stop execution of your tests; `t.Fatal()` will stop the execution of the current test 
 - use `go test ./cmd/web` command to run all the tests in our `cmd/web` package like
 - Table-driven tests: a way to run multiple test cases. You can define your test cases in a slice of anonymous structs
+- To unit test your HTTP handlers and middleware is to simply call them using the httptest.ResponseRecorder type. You can then examine the status code, headers and response body of the recorded response to make sure that they are working as expected.
+
