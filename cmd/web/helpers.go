@@ -59,5 +59,9 @@ func (app *application) clientError(w http.ResponseWriter, status int) {
 }
 
 func (app *application) isAuthenticated(r *http.Request) bool {
-	return app.SessionManager.Exists(r.Context(), "authenticatedUserID")
+	isAuthenticated, ok := r.Context().Value(isAuthenticatedKey).(bool)
+	if !ok {
+		return false
+	}
+	return isAuthenticated
 }

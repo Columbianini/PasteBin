@@ -61,3 +61,7 @@ GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1'
 17. Generate TLS certificate for HTTPS server
 - create a tls folder under workspace
 - `go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2049 --host=localhost`
+18. Named type in golang
+- we can create a new type named contextKey with underlying type string
+- the pattern is always used to avoid key collision
+- you can think of new type as a completely different types without inheriting the underlying type's method 
