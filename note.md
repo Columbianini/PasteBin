@@ -98,5 +98,6 @@ go test -race ./cmd/web/
 go test -parallel=4 ./...
 ```
 - You can add `t.Parallel()` just like `t.Helper()` in the test function if you want it to be running in parallel
-
-
+- mock and interface
+    - golang use duck type to check if a type is of interface
+    - When you use interface as a struct field. If methods are defined on value receivers (func (p Person)), both values and pointers work; If methods are defined on pointer receivers (func (p *Person)), only pointers satisfy the interface
