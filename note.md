@@ -76,3 +76,10 @@ GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1'
     -  The embedded file system is always rooted in the directory which contains the go:embed
     directive. So, in the example above, our Files variable contains an embed.FS embedded
     filesystem and the root of that filesystem is our ui directory.
+20. Unit-Test
+- standard practice: write your tests in `*_test.go` files which live directly alongside the code you are testing
+- Your unit tests are contained in a normal Go function with the signature `func(*testing.T)`
+- To be a valid unit test, the name of the function must begin with the word `Test`.
+- You can use the `t.Errorf()` function to make a test as failed and log a descriptive message about the failure. It's important to note that calling `t.Errorf()` doesn't stop execution of your tests
+- use `go test ./cmd/web` command to run all the tests in our `cmd/web` package like
+- Table-driven tests: a way to run multiple test cases
