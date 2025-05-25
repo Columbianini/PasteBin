@@ -65,3 +65,14 @@ GRANT SELECT, INSERT ON `mydb`.* TO 'web'@'192.168.10.1'
 - we can create a new type named contextKey with underlying type string
 - the pattern is always used to avoid key collision
 - you can think of new type as a completely different types without inheriting the underlying type's method 
+19. Embedded filesystem
+- bundle files directly into executable program
+- how?
+    - put a go file under the directory e.g. `ui/efs.go`
+    - add comment directive in the file immediately above the variable in which you want to store the embedded files
+    - The directive has the format `go:embed "<path>"`. The path is relative to the .go file containing the directive, so — in our case — `go:embed "static"` embeds the directory
+    `ui/static` from our project
+    - You can only use the go:embed directive on global variables at package level, not within functions or methods.
+    -  The embedded file system is always rooted in the directory which contains the go:embed
+    directive. So, in the example above, our Files variable contains an embed.FS embedded
+    filesystem and the root of that filesystem is our ui directory.
