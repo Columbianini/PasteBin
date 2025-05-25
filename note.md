@@ -96,6 +96,13 @@ go clean -testcache # remove all tests cache
 go test -failfast ./cmd/web # stop package tests when test failed
 go test -race ./cmd/web/
 go test -parallel=4 ./...
+go test -v -short ./...
+
+go test -cover ./... # test coverage
+
+go test -coverprofile=/tmp/profile.out ./...
+go tool cover -func=/tmp/profile.out
+go tool cover -html=/tmp/profile.out
 ```
 - You can add `t.Parallel()` just like `t.Helper()` in the test function if you want it to be running in parallel
 - mock and interface
